@@ -43,7 +43,7 @@ namespace ZXing.Net.Mobile.Forms.WindowsUniversal
 				base.SetNativeControl(zxingControl);
 
 				if (formsView.IsScanning)
-					zxingControl.StartScanning(formsView.RaiseScanResult, formsView.Options);
+					zxingControl.StartScanning((result) => formsView.RaiseScanResult(result), formsView.Options);
 
 				if (!formsView.IsAnalyzing)
 					zxingControl.PauseAnalysis();
@@ -75,7 +75,7 @@ namespace ZXing.Net.Mobile.Forms.WindowsUniversal
 					break;
 				case nameof(ZXingScannerView.IsScanning):
 					if (formsView.IsScanning)
-						zxingControl.StartScanning(formsView.RaiseScanResult, formsView.Options);
+						zxingControl.StartScanning((result) => formsView.RaiseScanResult(result), formsView.Options);
 					else
 						zxingControl.StopScanning();
 					break;

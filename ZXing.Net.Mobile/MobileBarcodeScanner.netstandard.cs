@@ -10,6 +10,9 @@ namespace ZXing.Mobile
 		Task<Result> PlatformScan(MobileBarcodeScanningOptions options)
 			=> throw ex;
 
+		Task<ResultWithRawImage> PlatformScanWithRawImage(MobileBarcodeScanningOptions options)
+			=> throw ex;
+
 		void PlatformScanContinuously(MobileBarcodeScanningOptions options, Action<Result> scanHandler)
 			=> throw ex;
 

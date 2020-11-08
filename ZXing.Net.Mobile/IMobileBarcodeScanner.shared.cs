@@ -57,6 +57,7 @@ namespace ZXing.Mobile
 		public string CameraUnsupportedMessage { get; set; }
 
 		public abstract Task<Result> Scan(MobileBarcodeScanningOptions options);
+		public abstract Task<ResultWithRawImage> ScanWithRawImage(MobileBarcodeScanningOptions options);
 
 		public Task<Result> Scan()
 			=> Scan(MobileBarcodeScanningOptions.Default);

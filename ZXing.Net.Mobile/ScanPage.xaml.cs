@@ -170,7 +170,6 @@ namespace ZXing.Mobile
 		public bool ContinuousScanning { get; set; }
 		public MobileBarcodeScanningOptions Options { get; set; }
 		public Action<ZXing.Result> ResultHandler { get; set; }
-
 		public Action CameraInitialized { get; set; }
 		public Action<IEnumerable<string>> CameraError { get; set; }
 	}

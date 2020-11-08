@@ -8,6 +8,9 @@ namespace ZXing.Mobile
 		public override Task<Result> Scan(MobileBarcodeScanningOptions options)
 			=> PlatformScan(options);
 
+		public override Task<ResultWithRawImage> ScanWithRawImage(MobileBarcodeScanningOptions options)
+			=> PlatformScanWithRawImage(options);
+
 		public override void ScanContinuously(MobileBarcodeScanningOptions options, Action<Result> scanHandler)
 			=> PlatformScanContinuously(options, scanHandler);
 
@@ -27,9 +30,9 @@ namespace ZXing.Mobile
 			=> PlatformPauseAnalysis();
 
 		public override void ResumeAnalysis()
-			=> PlatformResumeAnalysis();
+			=> PlatformResumeAnalysis();        
 
-		public override bool IsTorchOn
+        public override bool IsTorchOn
 			=> PlatformIsTorchOn;
 	}
 }

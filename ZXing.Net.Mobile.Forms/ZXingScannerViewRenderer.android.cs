@@ -79,7 +79,7 @@ namespace ZXing.Net.Mobile.Forms.Android
 				base.SetNativeControl(zxingSurface);
 
 				if (formsView.IsScanning)
-					zxingSurface.StartScanning(formsView.RaiseScanResult, formsView.Options);
+					zxingSurface.StartScanning((result, rawImage) => formsView.RaiseScanResult(result, rawImage), formsView.Options);
 
 				if (formsView.IsTorchOn)
 					zxingSurface.Torch(true);
@@ -100,7 +100,7 @@ namespace ZXing.Net.Mobile.Forms.Android
 					break;
 				case nameof(ZXingScannerView.IsScanning):
 					if (formsView.IsScanning)
-						zxingSurface.StartScanning(formsView.RaiseScanResult, formsView.Options);
+						zxingSurface.StartScanning((result, rawImage) => formsView.RaiseScanResult(result, rawImage), formsView.Options);
 					else
 						zxingSurface.StopScanning();
 					break;

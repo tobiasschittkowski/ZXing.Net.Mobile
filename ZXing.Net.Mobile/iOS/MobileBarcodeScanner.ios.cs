@@ -23,6 +23,10 @@ namespace ZXing.Mobile
 		public Task<Result> Scan(bool useAVCaptureEngine)
 			=> Scan(new MobileBarcodeScanningOptions(), useAVCaptureEngine);
 
+		internal Task<ResultWithRawImage> PlatformScanWithRawImage(MobileBarcodeScanningOptions options)
+		{
+			return ScanWithRawImage(options);
+		}
 
 		Task<Result> PlatformScan(MobileBarcodeScanningOptions options)
 			=> Scan(options, false);

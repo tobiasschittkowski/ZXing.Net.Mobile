@@ -33,6 +33,36 @@ namespace ZXing.Mobile
 		void PlatformResumeAnalysis()
 			=> zxingScannerWindow.ResumeAnalysis();
 
+		Task<ResultWithRawImage> PlatformScanWithRawImage(MobileBarcodeScanningOptions options)
+		{
+			var task = Task.Factory.StartNew(() =>
+			{
+				var waitScanResetEvent = new ManualResetEvent(false);
+				ResultWithRawImage result = null;
+
+				zxingScannerWindow.ScanningOptions = options;
+				zxingScannerWindow.ScanContinuously = false;
+				zxingScannerWindow.UseCustomOverlayView = UseCustomOverlay;
+				zxingScannerWindow.CustomOverlayView = CustomOverlay;
+				zxingScannerWindow.TopText = TopText;
+				zxingScannerWindow.BottomText = BottomText;
+
+				zxingScannerWindow.ScanCompletedHandlerWithRawImage = (Result r, byte[] rawImage) =>
+				{
+					result = new ResultWithRawImage()
+					{
+						Result = r,
+						RawImage = rawImage
+					};
+					waitScanResetEvent.Set();
+				};
+				zxingScannerWindow.Show();
+				waitScanResetEvent.WaitOne();
+				return result;
+			});
+			return task;
+		}
+
 		Task<Result> PlatformScan(MobileBarcodeScanningOptions options)
 		{
 			var task = Task.Factory.StartNew(() =>

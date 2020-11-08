@@ -6,6 +6,8 @@ namespace ZXing.Mobile
 	class ZxingScannerWindow : Window
 	{
 		public Action<Result> ScanCompletedHandler { get; set; }
+		public Action<Result, byte[]> ScanCompletedHandlerWithRawImage { get; set; }
+
 		public bool ScanContinuously { get; set; }
 
 		public MobileBarcodeScanningOptions ScanningOptions {
@@ -87,9 +89,11 @@ namespace ZXing.Mobile
 				overlayBackground.SetContent(defaultOverlay);
 				defaultOverlay.Show();
 			}
-			zxingMediaView.StartScanning(result =>
+			zxingMediaView.StartScanning((result, rawImage) =>
 			{
 				ScanCompletedHandler?.Invoke(result);
+				ScanCompletedHandlerWithRawImage?.Invoke(result, rawImage);
+
 				if (!ScanContinuously)
 				{
 					zxingMediaView.StopScanning();

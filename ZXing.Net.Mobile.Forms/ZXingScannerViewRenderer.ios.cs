@@ -58,7 +58,7 @@ namespace ZXing.Net.Mobile.Forms.iOS
 				base.SetNativeControl(zxingView);
 
 				if (formsView.IsScanning)
-					zxingView.StartScanning(formsView.RaiseScanResult, formsView.Options);
+					zxingView.StartScanning((result, rawImage) => formsView.RaiseScanResult(result, rawImage), formsView.Options);
 
 				if (!formsView.IsAnalyzing)
 					zxingView.PauseAnalysis();
@@ -84,7 +84,7 @@ namespace ZXing.Net.Mobile.Forms.iOS
 					break;
 				case nameof(ZXingScannerView.IsScanning):
 					if (formsView.IsScanning)
-						zxingView.StartScanning(formsView.RaiseScanResult, formsView.Options);
+						zxingView.StartScanning((result, rawImage) => formsView.RaiseScanResult(result, rawImage), formsView.Options);
 					else
 						zxingView.StopScanning();
 					break;

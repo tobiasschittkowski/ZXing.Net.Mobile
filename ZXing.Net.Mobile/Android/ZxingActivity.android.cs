@@ -35,6 +35,7 @@ namespace ZXing.Mobile
 		};
 
 		public static Action<ZXing.Result> ScanCompletedHandler;
+		public static Action<ZXing.Result, byte[]> ScanCompletedHandlerWithRawImage;
 		public static Action CanceledHandler;
 
 		public static Action CancelRequestedHandler;
@@ -116,9 +117,10 @@ namespace ZXing.Mobile
 
 		void StartScanning()
 		{
-			scannerFragment.StartScanning(result =>
+			scannerFragment.StartScanning((result, rawImage) =>
 			{
 				ScanCompletedHandler?.Invoke(result);
+				ScanCompletedHandlerWithRawImage?.Invoke(result, rawImage);
 
 				if (!ZxingActivity.ScanContinuously)
 					Finish();

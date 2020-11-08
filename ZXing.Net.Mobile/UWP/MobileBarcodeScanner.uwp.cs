@@ -42,6 +42,11 @@ namespace ZXing.Mobile
 			});
 		}
 
+		Task<ResultWithRawImage> PlatformScanWithRawImage(MobileBarcodeScanningOptions options)
+		{
+			throw new NotSupportedException();
+		}
+
 		async Task<Result> PlatformScan(MobileBarcodeScanningOptions options)
 		{
 			var rootFrame = RootFrame ?? Window.Current.Content as Frame ?? ((FrameworkElement)Window.Current.Content).GetFirstChildOfType<Frame>();

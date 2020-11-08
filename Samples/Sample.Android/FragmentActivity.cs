@@ -66,7 +66,7 @@ namespace Sample.Android
 				}
 			};
 
-			scanFragment.StartScanning(result =>
+			scanFragment.StartScanning((result, imageBytes) =>
 			{
 
 				// Null result means scanning was cancelled

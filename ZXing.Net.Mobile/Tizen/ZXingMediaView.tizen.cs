@@ -54,6 +54,11 @@ namespace ZXing.Mobile
 
 		public void StartScanning(Action<Result> scanResultHandler, MobileBarcodeScanningOptions options = null)
 		{
+			StartScanning((result, imagesBytes) => scanResultHandler(result), options);
+		}
+
+		public void StartScanning(Action<Result, byte[]> scanResultHandler, MobileBarcodeScanningOptions options = null)
+		{
 			IsAnalyzing = true;
 			Show();
 			zxingScannerCamera.ScanningOptions = options;

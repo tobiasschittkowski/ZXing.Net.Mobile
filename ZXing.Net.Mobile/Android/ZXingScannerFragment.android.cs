@@ -114,9 +114,14 @@ namespace ZXing.Mobile
 		public void AutoFocus(int x, int y)
 			=> scanner?.AutoFocus(x, y);
 
-		Action<Result> scanCallback;
+		Action<Result, byte[]> scanCallback;
 
 		public void StartScanning(Action<Result> scanResultHandler, MobileBarcodeScanningOptions options = null)
+		{
+			StartScanning((result, imagesBytes) => scanResultHandler(result), options);
+		}
+
+		public void StartScanning(Action<Result, byte[]> scanResultHandler, MobileBarcodeScanningOptions options = null)
 		{
 			ScanningOptions = options;
 			scanCallback = scanResultHandler;

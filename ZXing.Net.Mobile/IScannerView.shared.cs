@@ -5,6 +5,9 @@ namespace ZXing.Mobile
 	public interface IScannerView
 	{
 		void StartScanning(Action<Result> scanResultHandler, MobileBarcodeScanningOptions options = null);
+
+		// Includes the raw image data in the result handler
+		void StartScanning(Action<Result, byte[]> scanResultHandler, MobileBarcodeScanningOptions options = null);
 		void StopScanning();
 
 		void PauseAnalysis();
